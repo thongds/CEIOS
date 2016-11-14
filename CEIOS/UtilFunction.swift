@@ -9,5 +9,18 @@
 import UIKit
 
 class UtilFunction: NSObject {
-
+    
+    public func createCirclePath(arcCenter: CGPoint,
+                          radius: CGFloat,
+                          startAngle: CGFloat,
+                          endAngle: CGFloat,
+                          clockwise: Bool) -> UIBezierPath {
+        
+        return UIBezierPath(arcCenter: arcCenter,
+                                      radius: radius,
+                                      startAngle: startAngle,
+                                      endAngle: endAngle,
+                                      clockwise: clockwise)
+    }
+    
 }

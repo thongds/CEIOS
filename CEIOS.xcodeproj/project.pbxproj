@@ -7,19 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C59D02B1DD5511C00AB3EF7 /* SectionCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C59D02A1DD5511C00AB3EF7 /* SectionCircle.swift */; };
+		5C59D02D1DD5515500AB3EF7 /* PercentCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C59D02C1DD5515500AB3EF7 /* PercentCircle.swift */; };
+		5C59D02F1DD5589900AB3EF7 /* PercentLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C59D02E1DD5589900AB3EF7 /* PercentLine.swift */; };
+		5CAF47A91DD6C85600AF27BD /* UtilFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAF47A81DD6C85600AF27BD /* UtilFunction.swift */; };
+		5CB1EE031DD427F500FF1308 /* HeaderViewBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB1EE021DD427F500FF1308 /* HeaderViewBackground.swift */; };
+		5CB1EE071DD4294200FF1308 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB1EE061DD4294200FF1308 /* UIViewExtensions.swift */; };
+		5CB1EE091DD46FA100FF1308 /* AppProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB1EE081DD46FA100FF1308 /* AppProgressBar.swift */; };
 		5CBB45311DD35B3F00E4CBA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBB45301DD35B3F00E4CBA7 /* AppDelegate.swift */; };
 		5CBB45331DD35B3F00E4CBA7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBB45321DD35B3F00E4CBA7 /* ViewController.swift */; };
-		5CBB45361DD35B3F00E4CBA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CBB45341DD35B3F00E4CBA7 /* Main.storyboard */; };
 		5CBB45391DD35B3F00E4CBA7 /* CEIOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5CBB45371DD35B3F00E4CBA7 /* CEIOS.xcdatamodeld */; };
 		5CBB453B1DD35B3F00E4CBA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CBB453A1DD35B3F00E4CBA7 /* Assets.xcassets */; };
 		5CBB453E1DD35B3F00E4CBA7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CBB453C1DD35B3F00E4CBA7 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5C59D02A1DD5511C00AB3EF7 /* SectionCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionCircle.swift; sourceTree = "<group>"; };
+		5C59D02C1DD5515500AB3EF7 /* PercentCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PercentCircle.swift; sourceTree = "<group>"; };
+		5C59D02E1DD5589900AB3EF7 /* PercentLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PercentLine.swift; sourceTree = "<group>"; };
+		5CAF47A81DD6C85600AF27BD /* UtilFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilFunction.swift; sourceTree = "<group>"; };
+		5CB1EE021DD427F500FF1308 /* HeaderViewBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderViewBackground.swift; sourceTree = "<group>"; };
+		5CB1EE061DD4294200FF1308 /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
+		5CB1EE081DD46FA100FF1308 /* AppProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppProgressBar.swift; sourceTree = "<group>"; };
 		5CBB452D1DD35B3F00E4CBA7 /* CEIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CEIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CBB45301DD35B3F00E4CBA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5CBB45321DD35B3F00E4CBA7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		5CBB45351DD35B3F00E4CBA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5CBB45381DD35B3F00E4CBA7 /* CEIOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CEIOS.xcdatamodel; sourceTree = "<group>"; };
 		5CBB453A1DD35B3F00E4CBA7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5CBB453D1DD35B3F00E4CBA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -37,6 +49,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5CAF47A71DD6C82D00AF27BD /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				5CAF47A81DD6C85600AF27BD /* UtilFunction.swift */,
+			);
+			name = Util;
+			sourceTree = "<group>";
+		};
+		5CB1EE011DD4279900FF1308 /* ViewCustome */ = {
+			isa = PBXGroup;
+			children = (
+				5CB1EE021DD427F500FF1308 /* HeaderViewBackground.swift */,
+				5CB1EE081DD46FA100FF1308 /* AppProgressBar.swift */,
+				5C59D02A1DD5511C00AB3EF7 /* SectionCircle.swift */,
+				5C59D02C1DD5515500AB3EF7 /* PercentCircle.swift */,
+				5C59D02E1DD5589900AB3EF7 /* PercentLine.swift */,
+			);
+			name = ViewCustome;
+			sourceTree = "<group>";
+		};
+		5CB1EE051DD4288800FF1308 /* Extendsions */ = {
+			isa = PBXGroup;
+			children = (
+				5CB1EE061DD4294200FF1308 /* UIViewExtensions.swift */,
+			);
+			name = Extendsions;
+			sourceTree = "<group>";
+		};
 		5CBB45241DD35B3F00E4CBA7 = {
 			isa = PBXGroup;
 			children = (
@@ -56,9 +96,11 @@
 		5CBB452F1DD35B3F00E4CBA7 /* CEIOS */ = {
 			isa = PBXGroup;
 			children = (
+				5CAF47A71DD6C82D00AF27BD /* Util */,
+				5CB1EE051DD4288800FF1308 /* Extendsions */,
+				5CB1EE011DD4279900FF1308 /* ViewCustome */,
 				5CBB45301DD35B3F00E4CBA7 /* AppDelegate.swift */,
 				5CBB45321DD35B3F00E4CBA7 /* ViewController.swift */,
-				5CBB45341DD35B3F00E4CBA7 /* Main.storyboard */,
 				5CBB453A1DD35B3F00E4CBA7 /* Assets.xcassets */,
 				5CBB453C1DD35B3F00E4CBA7 /* LaunchScreen.storyboard */,
 				5CBB453F1DD35B3F00E4CBA7 /* Info.plist */,
@@ -129,7 +171,6 @@
 			files = (
 				5CBB453E1DD35B3F00E4CBA7 /* LaunchScreen.storyboard in Resources */,
 				5CBB453B1DD35B3F00E4CBA7 /* Assets.xcassets in Resources */,
-				5CBB45361DD35B3F00E4CBA7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,22 +182,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				5CBB45331DD35B3F00E4CBA7 /* ViewController.swift in Sources */,
+				5C59D02D1DD5515500AB3EF7 /* PercentCircle.swift in Sources */,
+				5CB1EE071DD4294200FF1308 /* UIViewExtensions.swift in Sources */,
+				5CAF47A91DD6C85600AF27BD /* UtilFunction.swift in Sources */,
+				5CB1EE091DD46FA100FF1308 /* AppProgressBar.swift in Sources */,
+				5CB1EE031DD427F500FF1308 /* HeaderViewBackground.swift in Sources */,
 				5CBB45311DD35B3F00E4CBA7 /* AppDelegate.swift in Sources */,
 				5CBB45391DD35B3F00E4CBA7 /* CEIOS.xcdatamodeld in Sources */,
+				5C59D02F1DD5589900AB3EF7 /* PercentLine.swift in Sources */,
+				5C59D02B1DD5511C00AB3EF7 /* SectionCircle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		5CBB45341DD35B3F00E4CBA7 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5CBB45351DD35B3F00E4CBA7 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		5CBB453C1DD35B3F00E4CBA7 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -265,6 +305,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 89TP3C25P2;
 				INFOPLIST_FILE = CEIOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = sip.CEIOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -278,6 +319,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 89TP3C25P2;
 				INFOPLIST_FILE = CEIOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = sip.CEIOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -304,6 +346,7 @@
 				5CBB45441DD35B3F00E4CBA7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
