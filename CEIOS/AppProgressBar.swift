@@ -12,13 +12,6 @@ protocol  AppProgressBarOnclick {
 }
 class AppProgressBar: UIView {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
     var numberLabel:UILabel?
     var textString : String?
     let lineWidth : CGFloat =  2
@@ -33,15 +26,19 @@ class AppProgressBar: UIView {
     let trianglePlayShape = CAShapeLayer()
     let tickShape = CAShapeLayer()
     let percent : Float
+    let callBackParam : AppProgressBarOnclick
+    let typeParam : Int
     let utilFunction = UtilFunction()
     override func draw(_ rect: CGRect) {
         addShape()
     }
     
-    init(frame: CGRect,textLabel : String,percentParam :Float) {
+    init(frame: CGRect,textLabel : String,percentParam :Float,type : Int,callBack : AppProgressBarOnclick) {
         textString = textLabel
         mFrame = frame
         percent = percentParam
+        callBackParam = callBack
+        typeParam = type
         super.init(frame: frame)
         self.backgroundColor = UIColor.clear
     }
@@ -49,7 +46,7 @@ class AppProgressBar: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     func addShape()  {
-               //sectionCircle
+        //sectionCircle
         sectionCircleShape.frame = CGRect(x: 0, y: 0, width: frame.size.height, height: frame.size.height)
         let space =  mFrame.size.width/100
         let arcCenter = sectionCircleShape.position
@@ -200,8 +197,8 @@ class AppProgressBar: UIView {
         }
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let first = touches.first {
-            
+        if touches.first != nil {
+            callBackParam.onClick(type: typeParam)
         }
     }
 }

@@ -22,5 +22,13 @@ class UtilFunction: NSObject {
                                       endAngle: endAngle,
                                       clockwise: clockwise)
     }
+    public func createTrianglePath(x1: CGPoint,x2 : CGPoint,x3: CGPoint) -> UIBezierPath{
+        let closePath = UIBezierPath()
+        closePath.move(to: x1)
+        closePath.addLine(to: x2)
+        closePath.addLine(to: x3)
+        closePath.addLine(to: x1)
+        return closePath
+    }
     
 }

@@ -8,8 +8,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController,AppProgressBarOnclick {
+    
+    let localhost =  "http://192.168.1.102/blog/public/uploads/02.mp3"
     override func viewDidLoad() {
         super.viewDidLoad()
         mainView()
@@ -19,7 +20,13 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    lazy var downloadSession : URLSession = {
+        
+        let configuration = URLSessionConfiguration.default
+        let session = URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
+        return session
+    }()
+
     func mainView() {
         let button = UIButton(frame: CGRect(x: view.bounds.size.width/2-50, y:  view.bounds.size.height/2-50, width: 100, height:100))
         button.backgroundColor = UIColor.blue
@@ -75,13 +82,13 @@ class ViewController: UIViewController {
         let progressHeigt = viewProgressBarHolder.bounds.size.height*7/24
         let space = viewProgressBarHolder.bounds.size.height*1/24
         var rect = CGRect(x: 0, y: 0, width: viewProgressBarHolder.bounds.size.width, height: progressHeigt )
-        let speakingProgress = AppProgressBar(frame: rect, textLabel: "Speaking",percentParam: 100)
+        let speakingProgress = AppProgressBar(frame: rect, textLabel: "Speaking",percentParam: 100,type: 1,callBack: self)
         speakingProgress.translatesAutoresizingMaskIntoConstraints = false
         rect.origin.y =  rect.origin.y + progressHeigt + space
-        let listen = AppProgressBar(frame: rect, textLabel: "Listening", percentParam: 50)
+        let listen = AppProgressBar(frame: rect, textLabel: "Listening", percentParam: 50,type: 2,callBack: self)
         listen.translatesAutoresizingMaskIntoConstraints = false
         rect.origin.y =  rect.origin.y + progressHeigt + space
-        let newWord = AppProgressBar(frame: rect, textLabel: "New word", percentParam: 40)
+        let newWord = AppProgressBar(frame: rect, textLabel: "New word", percentParam: 40,type: 3,callBack: self)
         newWord.translatesAutoresizingMaskIntoConstraints = false
         viewProgressBarHolder.addSubview(speakingProgress)
         viewProgressBarHolder.addSubview(listen)
@@ -91,6 +98,72 @@ class ViewController: UIViewController {
     func backAction() {
         
     }
-
+    func onClick(type : Int){
+        switch type {
+        case 1:
+            if let url = URL(string: localhost){
+//                let downloadTask = downloadSession.downloadTask(with: url)
+//                downloadTask.resume()
+                if  let url = localFilePathForUrl(localhost) {
+                    let viewController = SpeakingViewController()
+                    viewController.url = url
+                    self.navigationController?.pushViewController(viewController, animated: true)
+                }
+                
+            }
+           
+            break
+        default: break
+            
+        }
+        //self.navigationController?.pushViewController(viewController, animated: true)
+    }
 }
+extension UIViewController: URLSessionDownloadDelegate {
+    func localFilePathForUrl(_ previewUrl: String) -> URL? {
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
+        if let url = URL(string: previewUrl){
+            let lastPathComponent = url.lastPathComponent
+            let fullPath = documentsPath.appendingPathComponent(lastPathComponent)
+            return URL(fileURLWithPath:fullPath)
+            
+        }
+        return nil
+    }
+    public func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL){
+        if let originalURL  = downloadTask.originalRequest?.url?.absoluteString, let destinationURL = localFilePathForUrl(originalURL) {
+            print("originalURL \(originalURL) destinationURL \(destinationURL)")
+            let fileManager = FileManager.default
+            do{
+                try fileManager.removeItem(at: destinationURL)
+            }catch{
+                 print("Could not removeItem: \(error.localizedDescription)")
+            }
+            do {
+                try fileManager.copyItem(at: location, to: destinationURL)
+                let viewController = SpeakingViewController()
+                viewController.url = destinationURL
+                self.navigationController?.pushViewController(viewController, animated: true)
+            }
+            catch let error as NSError{
+                print("Could not copy file to disk: \(error.localizedDescription)")
+            }
+        }
+        
+//        if let url = downloadTask.originalRequest?.url?.absoluteString {
+//            activeDownloads[url] = nil
+//            // 4
+//            if let trackIndex = trackIndexForDownloadTask(downloadTask: downloadTask) {
+//                DispatchQueue.main.async{
+//                    let indexPath = IndexPath(row: trackIndex, section: 0)
+//                    self.tableView.reloadRows(at: [indexPath], with: .none)
+//                }
+//            }
+//        }
+      
+        
+    }
+    
+}
+
 
