@@ -86,16 +86,17 @@ class ControllerWaveForm: UIView{
         controllerView.addSubview(zoomInButton!)
         controllerView.addSubview(zoomOutButton!)
         
-        
-        mButtonStart = CustomButtom(frame: CGRect(x: 0, y: 100, width: buttonWidth, height: 50),parentViewParam : self,isLeft : true,delegate: self)
+        let buttonWidth = CGFloat(100)
+        let buttonHeigh = CGFloat(50)
+        mButtonStart = CustomButtom(frame: CGRect(x: 0, y: 0, width: buttonWidth, height: buttonHeigh),parentViewParam : self,isLeft : true,delegate: self)
         mButtonStart?.setBackgroundImage(UIImage(named : "HandleLeftBig"), for: .normal)
-        mButtonEnd = CustomButtom(frame: CGRect(x: Int(frame.size.width-100), y: Int(frame.size.height-150), width: buttonWidth, height: 50),parentViewParam : self,isLeft : false,delegate: self)
+        mButtonEnd = CustomButtom(frame: CGRect(x: frame.size.width-buttonWidth, y: mWaveformView!.frame.height-buttonHeigh, width: buttonWidth, height: buttonHeigh),parentViewParam : self,isLeft : false,delegate: self)
         mButtonEnd?.setBackgroundImage(UIImage(named: "buttonHandle"), for: .normal)
        
         finishOpeningSoundFile()
         addSubview(mWaveformView!)
-        addSubview(mButtonEnd!)
-        addSubview(mButtonStart!)
+        mWaveformView!.addSubview(mButtonEnd!)
+        mWaveformView!.addSubview(mButtonStart!)
         addSubview(controllerView)
     }
     
