@@ -60,8 +60,8 @@ class ViewController: UIViewController,AppProgressBarOnclick {
         
         showMoreImageView.frame = CGRect(x: viewHeader.bounds.size.width/2 - (showMoreImage?.size.width)!/2, y: viewHeader.bounds.size.height-(showMoreImage?.size.height)!-8 , width: (showMoreImage?.size.width)!, height: (showMoreImage?.size.height)!)
         showMoreImageView.translatesAutoresizingMaskIntoConstraints = false
-//        viewHeader.addSubview(showMoreImageView)
-//        viewHeader.addSubview(textView)
+        viewHeader.addSubview(showMoreImageView)
+        viewHeader.addSubview(textView)
         view.addSubview(viewHeader)
         // view Body 
         let viewBodyHolder = UIView(frame: CGRect(x: 0, y: view.bounds.size.height/2, width: view.bounds.size.width, height: view.bounds.size.height/2))
