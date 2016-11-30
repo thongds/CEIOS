@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import MediaPlayer
+import AVKit
 
 class ScrollViewTabViewController: UIViewController ,UIScrollViewDelegate {
 
@@ -14,8 +16,28 @@ class ScrollViewTabViewController: UIViewController ,UIScrollViewDelegate {
     let hide = false
     var lefHeaderTab = UILabel()
     var rightHeaderTab = UILabel()
+    var  playButton = PlayButtonView()
+    let mainStoryViewController = MainStoryViewController()
+    let moviePlayer = AVPlayerViewController()
+    let questionViewController = QuestionCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
     override func viewDidLoad() {
         super.viewDidLoad()
+        showSubtitle()
+        addView()
+    }
+    override var prefersStatusBarHidden: Bool {
+        return hide
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    override func viewDidLayoutSubviews() {
+        if let uwScrollView = scrollView {
+            uwScrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        }
+    }
+    func addView() {
         navigationController?.navigationBar.isHidden = hide
         //view.translatesAutoresizingMaskIntoConstraints = false
         
@@ -30,7 +52,8 @@ class ScrollViewTabViewController: UIViewController ,UIScrollViewDelegate {
         let playView = HeaderViewBackground(frame: CGRect(x: 0, y: nvHeight, width: viewContaint.frame.width, height: playViewHeight))
         
         let playButtonHeight = playViewHeight/2
-        let playButton = PlayButtonView(frame: CGRect(x: playView.frame.width/2 - playButtonHeight/2, y: playView.frame.height/2-playButtonHeight/2, width: playButtonHeight, height: playButtonHeight))
+        playButton = PlayButtonView(frame: CGRect(x: playView.frame.width/2 - playButtonHeight/2, y: playView.frame.height/2-playButtonHeight/2, width: playButtonHeight, height: playButtonHeight))
+        playButton.addTarget(self, action: #selector(self.clickPlay) , for: .touchUpInside)
         playView.addSubview(playButton)
         view.addSubview(playView)
         
@@ -49,8 +72,8 @@ class ScrollViewTabViewController: UIViewController ,UIScrollViewDelegate {
         rightHeaderTab.backgroundColor = UIColor.gray
         tabarHeader.addSubview(rightHeaderTab)
         view.addSubview(tabarHeader)
-//
-        let scrollViewHeight = view.frame.height-tabarHeader.frame.origin.y - tabarHeaderHeight 
+        //
+        let scrollViewHeight = view.frame.height-tabarHeader.frame.origin.y - tabarHeaderHeight
         scrollView = UIScrollView(frame: CGRect(x: 0, y: tabarHeader.frame.origin.y + tabarHeaderHeight, width: view.frame.width, height: scrollViewHeight))
         scrollView?.backgroundColor = UIColor.gray
         scrollView?.isPagingEnabled = true
@@ -58,41 +81,16 @@ class ScrollViewTabViewController: UIViewController ,UIScrollViewDelegate {
         scrollView?.translatesAutoresizingMaskIntoConstraints = false
         scrollView?.delegate = self
         view.addSubview(scrollView!)
-        let mainStoryViewController = MainStoryViewController()
         mainStoryViewController.view.backgroundColor = UIColor.red
         mainStoryViewController.view.frame = CGRect(x: 0, y: 0, width: (scrollView?.frame.width)!, height: scrollViewHeight)
         mainStoryViewController.viewParentSplit = viewContaint.frame.height - scrollViewHeight
-        let layout = UICollectionViewFlowLayout()
-        let questionViewController = QuestionCollectionViewController(collectionViewLayout: layout)
+        
         questionViewController.view.backgroundColor = UIColor.blue
         questionViewController.view.frame = CGRect(x:scrollView!.frame.width , y:0 , width: (scrollView?.frame.width)!, height: scrollViewHeight)
         addViewController(viewController: mainStoryViewController)
         addViewController(viewController: questionViewController)
-        // set scrollView contentsize 
+        // set scrollView contentsize
         scrollView?.contentSize = CGSize(width: view.frame.width*2, height: 1.0)
-       
-       
-//
-//        let views = ["scrollView": scrollView , "view" : view, "questionVC" : questionViewController.view, "mainStoryVC" : mainStoryViewController.view]
-//        let metrics = ["scrollHeight" : view.frame.height/2]
-//        NSLayoutConstraint.activate(NSLayoutConstraint.constraints(withVisualFormat: "V:|[scrollView(==view)]|", options: [], metrics: metrics, views: views))
-//        NSLayoutConstraint.activate(NSLayoutConstraint.constraints(withVisualFormat: "H:|[scrollView(==view)]|", options: [], metrics: nil, views: views))
-//        NSLayoutConstraint.activate(NSLayoutConstraint.constraints(withVisualFormat: "V:|[mainStoryVC(==scrollView)]|", options: [], metrics: nil, views: views))
-//        NSLayoutConstraint.activate(NSLayoutConstraint.constraints(withVisualFormat: "H:|[mainStoryVC(==scrollView)][questionVC(==scrollView)]|", options: [.alignAllTop,.alignAllBottom], metrics: nil, views: views))
-      
-     
-    }
-    override var prefersStatusBarHidden: Bool {
-        return hide
-    }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    override func viewDidLayoutSubviews() {
-        if let uwScrollView = scrollView {
-            uwScrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        }
     }
     func addViewController(viewController : UIViewController) {
             viewController.view.translatesAutoresizingMaskIntoConstraints = false
@@ -114,14 +112,41 @@ class ScrollViewTabViewController: UIViewController ,UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         print("scrollViewDidEndDecelerating \(scrollView.contentOffset.x)")
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func showSubtitle() {
+        let videoFile = Bundle.main.path(forResource: "02", ofType: "mp3")
+        
+        // Subtitle file
+        let subtitleFile = Bundle.main.path(forResource: "trailer_720p", ofType: "srt")
+        let subtitleURL = URL(fileURLWithPath: subtitleFile!)
+        
+        // Movie player
+       
+        moviePlayer.player = AVPlayer(url: URL(fileURLWithPath: videoFile!))
+        
+        // present(moviePlayer, animated: true, completion: nil)
+        
+        // Add subtitles
+        moviePlayer.addSubtitles().open(file: subtitleURL)
+        moviePlayer.setCallback(callback: mainStoryViewController.getSubCallback())
+        moviePlayer.addSubtitles().open(file: subtitleURL, encoding: String.Encoding.utf8)
+        
+        // Change text properties
+        moviePlayer.subtitleLabel?.textColor = UIColor.white
+        
+        // Play
+        //moviePlayer.player?.play()
+        
     }
-    */
+    
+    func clickPlay(){
+        if moviePlayer.player?.rate != 0 && moviePlayer.player?.error == nil {
+            moviePlayer.player?.pause()
+            playButton.setPlayStatus(isPlay: false)
+        }else{
+            moviePlayer.player?.play()
+            playButton.setPlayStatus(isPlay: true)
+        }
+    }
 
 }
+
