@@ -14,7 +14,7 @@ class SpeakingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.hidesBackButton = true
+        navigationItem.hidesBackButton = false
         self.view.backgroundColor = UIColor.red
         let waveFormFrame = CGRect(x: 0, y: view.frame.height*1/3, width: view.frame.width, height: view.frame.height*2/3)
         let controllerWaveForm = ControllerWaveForm(frame: waveFormFrame, mp3Url: url)
@@ -40,7 +40,8 @@ class SpeakingViewController: UIViewController {
         let sentence = UITextView(frame: textFrame)
         sentence.backgroundColor = UIColor.clear
         sentence.textAlignment = .center
-        sentence.text = "1. Do you create pickture and story in your mind as you sleap "
+        sentence.isEditable = false
+        sentence.text = "1. Do you create pickture and story in your mind as you sleep "
         view.addSubview(sentence)
         
     }
