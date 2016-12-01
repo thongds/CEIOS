@@ -113,10 +113,10 @@ class ScrollViewTabViewController: UIViewController ,UIScrollViewDelegate {
         print("scrollViewDidEndDecelerating \(scrollView.contentOffset.x)")
     }
     func showSubtitle() {
-        let videoFile = Bundle.main.path(forResource: "02", ofType: "mp3")
+        let videoFile = Bundle.main.path(forResource: "one_night_only", ofType: "mp3")
         
         // Subtitle file
-        let subtitleFile = Bundle.main.path(forResource: "trailer_720p", ofType: "srt")
+        let subtitleFile = Bundle.main.path(forResource: "one_night_only", ofType: "srt")
         let subtitleURL = URL(fileURLWithPath: subtitleFile!)
         
         // Movie player
@@ -126,7 +126,7 @@ class ScrollViewTabViewController: UIViewController ,UIScrollViewDelegate {
         // present(moviePlayer, animated: true, completion: nil)
         
         // Add subtitles
-        moviePlayer.addSubtitles().open(file: subtitleURL)
+        //moviePlayer.addSubtitles().open(file: subtitleURL)
         moviePlayer.setCallback(callback: mainStoryViewController.getSubCallback())
         moviePlayer.addSubtitles().open(file: subtitleURL, encoding: String.Encoding.utf8)
         

@@ -61,10 +61,10 @@ public extension AVPlayerViewController {
     }
     
     func show(subtitles string: String) {
-        
         // Parse
+        //print(string)
         parsedPayload = parseSubRip(string)
-        
+       // print(parsedPayload)
         // Add periodic notifications
         
         self.player?.addPeriodicTimeObserver(
@@ -127,17 +127,19 @@ public extension AVPlayerViewController {
             // Prepare payload
             var payload = payload.replacingOccurrences(of: "\n\r\n", with: "\n\n")
             payload = payload.replacingOccurrences(of: "\n\n\n", with: "\n\n")
-            
-            // Parsed dict
+            //print(payload)
+           // Parsed dict
             let parsed = NSMutableDictionary()
             
             // Get groups
             let regexStr = "(?m)(^[0-9]+)([\\s\\S]*?)(?=\n\n)"
             let regex = try NSRegularExpression(pattern: regexStr, options: .caseInsensitive)
             let matches = regex.matches(in: payload, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, payload.characters.count))
+            //print("payload \(payload)")
             for m in matches {
                 
                 let group = (payload as NSString).substring(with: m.range)
+                print(group)
                 
                 // Get index
                 var regex = try NSRegularExpression(pattern: "^[0-9]+", options: .caseInsensitive)
@@ -195,9 +197,9 @@ public extension AVPlayerViewController {
                 final["text"] = text
                 parsed[index] = final
                 
+                
             }
             
-            //print(parsed)
             return parsed
             
         } catch {
@@ -209,29 +211,25 @@ public extension AVPlayerViewController {
     }
     
     fileprivate func searchSubtitles(_ time: CMTime) {
-        
+      
         let predicate = NSPredicate(format: "(%f >= %K) AND (%f <= %K)", time.seconds, "from", time.seconds, "to")
         
         guard let values = parsedPayload?.allValues else {
             return
         }
         guard let result = (values as NSArray).filtered(using: predicate).first as? NSDictionary else {
-            subtitleLabel?.text = ""
             return
         }
-        guard let label = subtitleLabel else {
-            return
-        }
+       
         
         // Set text
-        label.text = (result["text"] as! String).trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         if let callback = mCallback {
             let sub = (result["text"] as! String).trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             callback.subByTimeReturn(text: sub)
         }
         // Adjust size
-        let rect = (label.text! as NSString).boundingRect(with: CGSize(width: label.bounds.width, height: CGFloat.greatestFiniteMagnitude), options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName : label.font!], context: nil)
-        subtitleLabelHeightConstraint?.constant = rect.size.height + 5.0
+//        let rect = (label.text! as NSString).boundingRect(with: CGSize(width: label.bounds.width, height: CGFloat.greatestFiniteMagnitude), options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName : label.font!], context: nil)
+//        subtitleLabelHeightConstraint?.constant = rect.size.height + 5.0
         
     }
     
