@@ -39,10 +39,10 @@ class ViewController: UIViewController,AppProgressBarOnclick {
         self.navigationController?.navigationBar.titleTextAttributes = [ NSForegroundColorAttributeName : UIColor.white]
         
         // navigation Controll
-        let backButton = UIBarButtonItem(image: UIImage(named : "back_image"), style: .plain, target: self, action: #selector(ViewController.backAction))
-        backButton.tintColor = UIColor.white
-        self.navigationItem.leftBarButtonItem = backButton
-        self.navigationItem.title = "Fire and Waster"
+//        let backButton = UIBarButtonItem(image: UIImage(named : "back_image"), style: .plain, target: self, action: #selector(ViewController.backAction))
+//        backButton.tintColor = UIColor.white
+//        self.navigationItem.leftBarButtonItem = backButton
+//        self.navigationItem.title = "Fire and Waster"
         // header
         let viewHeader = HeaderViewBackground(frame: CGRect(x: 0, y: 0, width: view.bounds.size.width, height: view.bounds.size.height/2))
         viewHeader.translatesAutoresizingMaskIntoConstraints = false

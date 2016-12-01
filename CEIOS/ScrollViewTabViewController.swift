@@ -137,7 +137,12 @@ class ScrollViewTabViewController: UIViewController ,UIScrollViewDelegate {
         //moviePlayer.player?.play()
         
     }
-    
+    override func viewDidDisappear(_ animated: Bool) {
+        if moviePlayer.player?.rate != 0 && moviePlayer.player?.error == nil {
+            moviePlayer.player?.pause()
+            playButton.setPlayStatus(isPlay: false)
+        }
+    }
     func clickPlay(){
         if moviePlayer.player?.rate != 0 && moviePlayer.player?.error == nil {
             moviePlayer.player?.pause()

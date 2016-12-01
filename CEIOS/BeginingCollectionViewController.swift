@@ -58,7 +58,10 @@ class BeginingCollectionViewController: UICollectionViewController, UICollection
         cell.backgroundColor = UIColor.green
         return cell
     }
-    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let viewController = ViewController()
+        navigationController?.pushViewController(viewController, animated: true)
+    }
     func setupMainCollectionView(){
         if let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout{
             layout.scrollDirection = .vertical
@@ -73,6 +76,7 @@ class BeginingCollectionViewController: UICollectionViewController, UICollection
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
     }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: view.frame.height/3)
     }

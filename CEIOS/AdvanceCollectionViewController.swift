@@ -58,7 +58,11 @@ class AdvanceCollectionViewController: UICollectionViewController , UICollection
         cell.backgroundColor = UIColor.red
         return cell
     }
-    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let viewController = ViewController()
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+
     func setupMainCollectionView(){
         if let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout{
             layout.scrollDirection = .vertical

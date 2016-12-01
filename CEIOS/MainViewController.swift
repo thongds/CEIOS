@@ -56,7 +56,7 @@ class MainViewController: UIViewController {
     }
     
     func addScrollView () {
-        let scrollViewHeight = view.frame.height - navigationHeight + tabarHeight + spaceTabarNavigation
+        let scrollViewHeight = view.frame.height - (navigationHeight + tabarHeight + spaceTabarNavigation)
         scrollView.frame = CGRect(x: 0, y: tabarView.frame.origin.y + tabarHeight, width: view.frame.width , height: scrollViewHeight)
         scrollView.backgroundColor = UIColor.gray
         scrollView.isPagingEnabled = true
